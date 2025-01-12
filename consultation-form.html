@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consultation au Cours d'Allemand</title>
+  <link rel="icon" href="img/mikel.png" type="image/png" />
+
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+    }
+
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        background-color: white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+    }
+
+    .logo img {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+    }
+
+    .contact-details {
+        font-size: 0.9em;
+        text-align: right;
+    }
+
+    .contact-details p {
+        margin: 2px 0;
+    }
+
+    .consultation-form {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background-color: white;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .btn-black {
+        background-color: #000;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .btn-black[disabled] {
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+
+    .spinner {
+        width: 16px;
+        height: 16px;
+        border: 2px solid white;
+        border-radius: 50%;
+        border-top: 2px solid transparent;
+        animation: spin 1s linear infinite;
+        margin-left: 10px;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .notification {
+        display: none;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    .contact-info {
+        margin-top: 20px;
+        text-align: center;
+        padding: 10px;
+        font-size: 0.9em;
+    }
+
+    h2, p {
+    text-align: center;
+}
+
+  </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <a href="index.html" class="logo" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+            <img src="image/photo1.png" style="width: 90px; height: 50px;" alt="Mikaels Logo">
+            <strong>Institut Mikaels</strong>
+        </a>
+        <div class="contact-details">
+            <p>6 Avenue de République, Rades, Tunis</p>
+            <p>seif.katri@mikaels.tn</p>
+            <p>+216 99 008 008</p>
+        </div>
+    </div>
+
+    <!-- Formulaire -->
+    <div class="consultation-form">
+        <!-- Notification -->
+        <div id="notification" class="notification"></div>
+
+        <h2>Consultation au Cours d'Allemand</h2>
+        <p>Les champs marqués d'un astérisque * sont obligatoires</p>
+
+        <!-- Date et Heure -->
+        <p id="appointmentDateTime" class="datetime-info"></p> 
+
+        <!-- Formulaire -->
+        <form id="consultationForm">
+            <!-- Prénom et Nom -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label>* Prénom :</label>
+                    <input type="text" id="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label>* Nom :</label>
+                    <input type="text" id="lastName" required>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label>* Email :</label>
+                <input type="email" id="email" required>
+            </div>
+
+            <!-- Téléphone -->
+            <div class="form-group">
+                <label>* Téléphone :</label>
+                <input type="tel" id="phone" required>
+            </div>
+
+            <!-- Ville -->
+            <div class="form-group">
+                <label>* Ville :</label>
+                <input type="text" id="city" required>
+            </div>
+
+            <!-- Date de naissance -->
+            <div class="form-group">
+                <label>* Date de naissance :</label>
+                <input type="date" id="birthDate" required>
+            </div>
+
+            <!-- Spécialité -->
+            <div class="form-group">
+                <label>* Spécialité :</label>
+                <input type="text" id="speciality" required>
+            </div>
+
+            <!-- Études en Allemagne -->
+            <div class="form-group">
+                <label>* Études en Allemagne :</label>
+                <select id="interested" required>
+                    <option value="Oui">Oui</option>
+                    <option value="Non">Non</option>
+                </select>
+            </div>
+
+            <!-- Horaires -->
+            <div class="form-group">
+                <label>* Horaires :</label>
+                <select id="schedule" required>
+                    <option value="08H00 - 11H00">08H00 - 11H00</option>
+                    <option value="14H00 - 17H00">14H00 - 17H00</option>
+                </select>
+            </div>
+
+            <!-- École -->
+            <div class="form-group">
+                <label>* École :</label>
+                <select id="school" required>
+                    <option value="Lac 1">Lac 1</option>
+                    <option value="Centre Ville">Centre Ville</option>
+                </select>
+            </div>
+
+            <!-- Remarques / Demandes spéciales -->
+            <div class="form-group">
+                <label>Remarques / Demandes spéciales :</label>
+                <input type="text" id="remarks">
+            </div>
+
+            <!-- Bouton de soumission -->
+            <button type="submit" id="submitBtn" class="btn-black">Confirmer</button>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('consultationForm');
+        const notification = document.getElementById('notification');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // Date et heure dynamiques
+        const urlParams = new URLSearchParams(window.location.search);
+        const date = urlParams.get('date') || 'mardi, 31 décembre 2024';
+        const time = urlParams.get('time') || '12:00';
+        document.getElementById('appointmentDateTime').textContent = `Date : ${date} - Heure : ${time}`;
+
+        // Validation Email
+        function validateEmail(email) {
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return emailRegex.test(email);
+        }
+
+        // Validation Téléphone
+        function validatePhone(phone) {
+            const phoneRegex = /^[0-9]{8,15}$/;
+            return phoneRegex.test(phone);
+        }
+
+        // Afficher Notification
+        function showNotification(message, type) {
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.style.display = 'block';
+
+            // Scroll vers la notification
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 5000);
+        }
+
+        // Gestionnaire d'envoi du formulaire
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            // Mode Loading
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Envoi en cours <div class="spinner"></div>';
+
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+
+            // Validation des champs
+            if (!validateEmail(email)) {
+                showNotification('Email invalide.', 'error');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Confirmer';
+                return;
+            }
+            if (!validatePhone(phone)) {
+                showNotification('Numéro de téléphone invalide.', 'error');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Confirmer';
+                return;
+            }
+
+            const formData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: email,
+                phone: phone,
+                city: document.getElementById('city').value,
+                birthDate: document.getElementById('birthDate').value,
+                speciality: document.getElementById('speciality').value,
+                interested: document.getElementById('interested').value,
+                schedule: document.getElementById('schedule').value,
+                school: document.getElementById('school').value,
+                remarks: document.getElementById('remarks').value,
+                date: date,
+                time: time,
+            };
+
+            try {
+                await fetch('https://mikaels.tn/book-consultation', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData),
+                });
+                showNotification('Consultation confirmée avec succès!', 'success');
+                form.reset();
+            } catch {
+                showNotification('Erreur lors de la confirmation.', 'error');
+            }
+
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'Confirmer';
+        });
+    </script>
+</body>

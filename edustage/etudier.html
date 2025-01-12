@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription - Étudier en Allemagne</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+    }
+
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        background-color: white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+    }
+
+    .logo img {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+    }
+
+    .contact-details {
+        font-size: 0.9em;
+        text-align: right;
+    }
+
+    .contact-details p {
+        margin: 2px 0;
+    }
+
+    .consultation-form {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background-color: white;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .btn-black {
+        background-color: #000;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .btn-black[disabled] {
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+
+    .spinner {
+        width: 16px;
+        height: 16px;
+        border: 2px solid white;
+        border-radius: 50%;
+        border-top: 2px solid transparent;
+        animation: spin 1s linear infinite;
+        margin-left: 10px;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .notification {
+        display: none;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    .contact-info {
+        margin-top: 20px;
+        text-align: center;
+        padding: 10px;
+        font-size: 0.9em;
+    }
+
+    h2, p {
+        text-align: center;
+    }
+  </style>
+</head>
+<body>
+     <!-- Header -->
+     <div class="header">
+        <a href="index.html" class="logo" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+            <img src="image/photo1.png" style="width: 90px; height: 50px;" alt="Mikaels Logo">
+            <strong>Institut Mikaels</strong>
+        </a>
+        <div class="contact-details">
+            <p>12 Rue du Lac Turkana, Tunis</p>
+            <p>info@mikaels.com</p>
+            <p>+216 99 008 008</p>
+        </div>
+    </div>
+    
+    <!-- Formulaire -->
+    <div class="consultation-form">
+        <div id="notification" class="notification"></div>
+
+        <h2>Inscription - Étudier en Allemagne</h2>
+        <p>Les champs marqués d'un astérisque * sont obligatoires</p>
+
+        <form id="inscriptionForm">
+            <div class="form-group">
+                <label>* Nom et Prénom :</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label>* Email :</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label>* Téléphone :</label>
+                <input type="tel" id="phone" required>
+            </div>
+             <div class="form-group">
+                <label>* Domaine :</label>
+                <select id="domaine" onchange="toggleOtherField()" required>
+                    <option value="BTS">BTS</option>
+                    <option value="BTP">BTP</option>
+                    <option value="Bachelors">Bachelors</option>
+                    <option value="Infirmier">Infirmier</option>
+                    <option value="Chauffeur">Chauffeur</option>
+                    <option value="Autre">Autre</option>
+                </select>
+            </div>
+            <div class="form-group" id="otherDomaineField" style="display: none;">
+                <label>Spécifiez votre domaine :</label>
+                <input type="text" id="otherDomaine">
+            </div>
+            <div class="form-group">
+                <label>* Niveau :</label>
+                <select id="level" required>
+                    <option value="A1">A1</option>
+                    <option value="A2">A2</option>
+                    <option value="B1">B1</option>
+					<option value="B1">B2</option>
+                    <option value="B1">C1</option>
+					<option value="B1">C2</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Remarques / Demandes spéciales :</label>
+                <input type="text" id="remarks">
+            </div>
+            <button type="submit" id="submitBtn" class="btn-black">Confirmer</button>
+        </form>
+    </div>
+
+    <!-- Script -->
+    <script>
+        function toggleOtherField() {
+            const domaine = document.getElementById('domaine');
+            const otherField = document.getElementById('otherDomaineField');
+            otherField.style.display = domaine.value === 'Autre' ? 'block' : 'none';
+        }
+
+        async function handleSubmit(event) {
+            event.preventDefault();
+            const notification = document.getElementById('notification');
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                domaine: document.getElementById('domaine').value,
+                level: document.getElementById('level').value,
+                remarks: document.getElementById('remarks').value,
+            };
+            await fetch('https://mikaels.tn/send-etudier', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(formData) });
+            notification.textContent = 'Inscription envoyée avec succès!';
+            notification.className = 'notification success';
+            notification.style.display = 'block';
+        }
+        document.getElementById('inscriptionForm').addEventListener('submit', handleSubmit);
+    </script>
+</body>
+</html>
