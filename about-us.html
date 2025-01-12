@@ -18,8 +18,32 @@
     <!-- main css -->
     <link rel="stylesheet" href="css/style.css" />
   </head>
+  <style>
+    @media (max-width: 768px) {
+    #about-page .navbar {
+        background-color: white !important; /* Set navbar background to white */
+    }
 
-  <body>
+    #about-page .navbar-brand span {
+        color: #0b2e59 !important; /* Set "Institut Mikaels" text to blue */
+    }
+
+    #about-page .nav-link {
+        color: #0b2e59 !important; /* Set all links to blue */
+    }
+
+    #about-page .nav-item.active .nav-link {
+        color: #d6b87b !important; /* Keep "À propos de nous" in yellow */
+    }
+
+    #about-page .nav-link:hover {
+        text-decoration: underline; /* Optional: Add underline effect on hover */
+    }
+}
+
+
+  </style>
+  <body id="about-page">
     <!--================ Start Header Menu Area =================-->
     <header class="header_area white-header">
       <div class="main_menu">
