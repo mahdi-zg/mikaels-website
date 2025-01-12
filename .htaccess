@@ -1,4 +1,9 @@
 RewriteEngine On
+
+# Redirection spécifique pour /index vers /
+RewriteRule ^index$ / [R=301,L]
+
+# Vos règles existantes
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.html -f
