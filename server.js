@@ -9,17 +9,26 @@ const port = process.env.PORT || 3000;
 
 // Middleware
 const corsOptions = {
-  origin: 'https://mikaels.tn', // Autoriser uniquement votre domaine
-  methods: ['GET', 'POST'],    // Autoriser uniquement les méthodes nécessaires
+  origin: ['https://mikaels.tn', 'https://www.mikaels.tn'],
+  methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type'],
+  credentials: true
 };
 app.use(cors(corsOptions));
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', req.headers.origin);
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+  next();
+});
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.get('/', (req, res) => {
-  res.send('Serveur fonctionnel sur https://mikaels.tn');
-});
 
 // Route POST pour l'inscription standard
 app.post('/send-email', async (req, res) => {
@@ -313,5 +322,6 @@ app.post('/send-formular', async (req, res) => {
 
 
 // Démarrer le serveur
-console.log(`Serveur en cours d'exécution sur le port ${port}`);
-
+app.listen(port, () => {
+  console.log(`Serveur en cours d'exécution sur http://localhost:${port}`);
+});
