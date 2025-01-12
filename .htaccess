@@ -1,9 +1,4 @@
 RewriteEngine On
-
-# Redirection spécifique pour /index vers /
-RewriteRule ^index$ / [R=301,L]
-
-# Vos règles existantes pour .html
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.html -f
@@ -12,8 +7,3 @@ RewriteRule ^(.+)$ $1.html [L,QSA]
 # Rediriger exemple.html vers exemple
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /.*\.html\ HTTP/
 RewriteRule ^(.*)\.html$ /$1 [R=301,L]
-
-# Rediriger les URLs non valides vers la page d'accueil
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ / [R=301,L]
